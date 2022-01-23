@@ -1,0 +1,72 @@
+description("This is springboot-multi-module")
+
+buildscript {
+
+    ext.versions = [
+            springbootVersion: '2.6.3'
+    ]
+
+    repositories {
+        mavenCentral()
+        // aliyun images
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter'}
+        // spring plugins
+        maven { url 'https://repo.spring.io/plugins-release'}
+    }
+
+    dependencies {
+        classpath ("org.springframework.boot:spring-boot-gradle-plugin:${versions.springbootVersion}")
+    }
+
+}
+
+allprojects {
+
+    group 'com.tbb'
+    version '1.0-SNAPSHOT'
+
+    // This is an executable task
+    task hello {
+        doLast {
+            task -> println "I'm $task.project.name"
+        }
+    }
+}
+
+subprojects {
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = '1.8' // 本次项目都是基于JDK-1.8版本编写的
+    targetCompatibility = '1.8' // 本次项目都是基于JDK-11版本编写的
+
+    /**
+     * This is an executable task
+     * test subproject executable task
+     */
+    hello {
+        doLast {
+            task -> println "I depend on springboot-multi-module"
+        }
+    }
+
+}
+
+/**
+ * This is an executable task
+ * test the specified subproject
+ */
+project(':springboot-multi-module-system').hello {
+    doLast {
+        println "I'm springboot-multi-module-system and depend on springboot-multi-module"
+    }
+}
+

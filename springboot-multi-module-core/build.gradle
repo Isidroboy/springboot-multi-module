@@ -1,0 +1,41 @@
+description("This is springboot-multi-module-core")
+//maven publish start
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+
+    repositories {
+
+        //publish to local repo
+        maven {
+            url "$buildDir/repo"
+        }
+
+        /* publish to remote
+        maven {
+            credentials {
+                username 'username'
+                password '*******'
+            }
+            def releasesRepoUrl = 'http://xxx:xxx/repository/releases'
+            def snapshotsRepoUrl  = 'http://xxx:xxx/repository/snapshots'
+            url = version.endsWith('SNAPSHOT')?snapshotsRepoUrl:releasesRepoUrl
+        }
+        */
+    }
+}
+//maven publish end
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,5 @@
+rootProject.name = 'springboot-multi-module'
+include 'springboot-multi-module-core'
+include 'springboot-multi-module-common'
+include 'springboot-multi-module-system'
+
