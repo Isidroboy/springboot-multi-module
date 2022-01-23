@@ -1,11 +1,12 @@
 description("This is springboot-multi-module-system")
 
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    Compile ('.:springboot-multi-module-core')
-//    implementation('.:springboot-multi-module-core')
-//    implementation('.:springboot-multi-module-common')
+    implementation(project(':springboot-multi-module-core'))
+    implementation(project(':springboot-multi-module-common'))
+
 }
 
 tasks.named('test') {

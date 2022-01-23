@@ -45,8 +45,8 @@ subprojects {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    sourceCompatibility = '1.8' // 本次项目都是基于JDK-1.8版本编写的
-    targetCompatibility = '1.8' // 本次项目都是基于JDK-11版本编写的
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 
     /**
      * This is an executable task
